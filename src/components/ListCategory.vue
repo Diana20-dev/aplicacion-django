@@ -29,6 +29,12 @@ export default {
                 .then(res => res.json())
                 .then(res => (this.elements = res));
         }
+    },
+    watch:{
+        "$route.params.id" : function (){
+            console.log("Listado de Categorias");
+            this.findAll();
+        }
     }
 };
 </script>

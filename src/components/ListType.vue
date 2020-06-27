@@ -1,13 +1,15 @@
 <template>
     <div class="container">
-        <ListDefault :elements-list="elements"/>    
+        <ListDefault :elements-list="elements"/>
     </div>
 </template>
 
 <script>
+
 import ListDefault from '../partials/_ListDefault'
 export default {
-     components:{
+
+    components:{
         ListDefault
     },
 
@@ -23,12 +25,18 @@ export default {
     },
     methods: {
         findAll: function(){
-            fetch('http://localhost:8000/api/element/?format=json')
+            fetch('http://localhost:8000/api/type/'+this.$route.params.id+'/elements/?format=json')
                 .then(res => res.json())
-                .then(res => this.elements = res)
+                .then(res => (this.elements = res));
         }
     },
-}
+    watch:{
+        "$route.params.id" : function (){
+            console.log("Listado de Categorias");
+            this.findAll();
+        }
+    }
+};
 </script>
 
 <style>
